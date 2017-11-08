@@ -12,7 +12,10 @@ class MainWindow(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
 
-        uic.loadUi("main_form.ui", self)
+        self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
+        self.gui_path = os.path.join(self.bundle_dir, 'main_form.ui')
+
+        uic.loadUi(self.gui_path, self)
         self.file_name = None
 
         self.search_dir()
@@ -30,10 +33,10 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         try:
-            os.chdir("./Passwords")
+            os.chdir(os.path.join(self.bundle_dir, "Passwords"))
         except FileNotFoundError:
-            os.mkdir("./Passwords")
-            os.chdir("./Passwords")
+            os.mkdir(os.path.join(self.bundle_dir, "Passwords"))
+            os.chdir(os.path.join(self.bundle_dir, "Passwords"))
 
     def update_files_list(self):
         """
