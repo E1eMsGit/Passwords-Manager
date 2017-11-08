@@ -16,6 +16,12 @@
     <height>419</height>
    </size>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>640</width>
+    <height>419</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Passwords Manager</string>
   </property>
