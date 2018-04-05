@@ -35,10 +35,10 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         try:
-            os.chdir(os.path.join(self.bundle_dir, "Passwords"))
+            os.chdir("Passwords")
         except FileNotFoundError:
-            os.mkdir(os.path.join(self.bundle_dir, "Passwords"))
-            os.chdir(os.path.join(self.bundle_dir, "Passwords"))
+            os.mkdir("Passwords")
+            os.chdir("Passwords")
 
     def update_files_list(self):
         """
