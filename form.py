@@ -1,4 +1,5 @@
 import os
+import sys
 import pickle
 
 from PyQt5 import QtCore, QtWidgets
@@ -12,6 +13,11 @@ class MainWindow(QtWidgets.QWidget):
 
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
+
+        if getattr(sys, "frozen", False):
+            self.bundle_dir = os.path.dirname(sys.executable)
+        else:
+            self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
 
         self.ui = form_design.Ui_Form()
         self.ui.setupUi(self)
@@ -33,10 +39,10 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         try:
-            os.chdir("Passwords")
+            os.chdir(os.path.join(self.bundle_dir, "Passwords"))
         except FileNotFoundError:
-            os.mkdir("Passwords")
-            os.chdir("Passwords")
+            os.mkdir(os.path.join(self.bundle_dir, "Passwords"))
+            os.chdir(os.path.join(self.bundle_dir, "Passwords"))
 
     def update_files_list(self):
         """
