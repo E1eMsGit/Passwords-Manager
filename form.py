@@ -16,8 +16,6 @@ class MainWindow(QtWidgets.QWidget):
         self.ui = form_design.Ui_Form()
         self.ui.setupUi(self)
 
-        self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
-
         self.file_name = None
 
         self.search_dir()
