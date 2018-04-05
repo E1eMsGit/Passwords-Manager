@@ -2,7 +2,7 @@ import os
 import pickle
 
 from PyQt5 import QtCore, QtWidgets, uic
-
+import form_design
 
 class MainWindow(QtWidgets.QWidget):
     """
@@ -12,19 +12,20 @@ class MainWindow(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
 
-        self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
-        self.gui_path = os.path.join(self.bundle_dir, 'main_form.ui')
+        self.ui = form_design.Ui_Form()
+        self.ui.setupUi(self)
 
-        uic.loadUi(self.gui_path, self)
+        self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
+
         self.file_name = None
 
         self.search_dir()
         self.update_files_list()
 
-        self.add_file_button.clicked.connect(self.add_file)
-        self.delete_file_button.clicked.connect(self.delete_file)
-        self.listWidget.itemClicked.connect(self.on_item_clicked)
-        self.save_button.clicked.connect(self.save_to_file)
+        self.ui.add_file_button.clicked.connect(self.add_file)
+        self.ui.delete_file_button.clicked.connect(self.delete_file)
+        self.ui.listWidget.itemClicked.connect(self.on_item_clicked)
+        self.ui.save_button.clicked.connect(self.save_to_file)
 
     def search_dir(self):
         """
@@ -44,7 +45,7 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         for file in os.listdir("."):
-            self.listWidget.addItem(file)
+            self.ui.listWidget.addItem(file)
 
     def closeEvent(self, e):
         """
@@ -71,7 +72,7 @@ class MainWindow(QtWidgets.QWidget):
         Создает файл и обновляет список файлов.
         :return:
         """
-        self.file_name = self.file_name_lineEdit.text()
+        self.file_name = self.ui.file_name_lineEdit.text()
         try:
             with open(self.file_name, "wb") as file:
                 pickle.dump("name\t\tlogin\t\tpassword\n" + ("-" * 87), file)
@@ -83,8 +84,8 @@ class MainWindow(QtWidgets.QWidget):
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )
-        self.file_name_lineEdit.clear()
-        self.listWidget.clear()
+        self.ui.file_name_lineEdit.clear()
+        self.ui.listWidget.clear()
         self.update_files_list()
 
     @QtCore.pyqtSlot()
@@ -111,10 +112,10 @@ class MainWindow(QtWidgets.QWidget):
                     QtWidgets.QMessageBox.Ok,
                     QtWidgets.QMessageBox.Ok
                 )
-            self.plainTextEdit.clear()
-            self.plainTextEdit.setEnabled(False)
-            self.save_button.setEnabled(False)
-            self.listWidget.clear()
+            self.ui.plainTextEdit.clear()
+            self.ui.plainTextEdit.setEnabled(False)
+            self.ui.save_button.setEnabled(False)
+            self.ui.listWidget.clear()
             self.update_files_list()
         else:
             pass
@@ -125,12 +126,12 @@ class MainWindow(QtWidgets.QWidget):
         Открывает выбранный файл и выводит его содержимое.
         :return:
         """
-        self.plainTextEdit.setEnabled(True)
-        self.save_button.setEnabled(True)
+        self.ui.plainTextEdit.setEnabled(True)
+        self.ui.save_button.setEnabled(True)
         self.file_name = self.sender().currentItem().text()
 
         with open(self.file_name, "rb") as file:
-            self.plainTextEdit.setPlainText(pickle.load(file))
+            self.ui.plainTextEdit.setPlainText(pickle.load(file))
 
     @QtCore.pyqtSlot()
     def save_to_file(self):
@@ -139,7 +140,7 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         with open(self.file_name, "wb") as file:
-            pickle.dump(self.plainTextEdit.toPlainText(), file)
+            pickle.dump(self.ui.plainTextEdit.toPlainText(), file)
 
 
 if __name__ == "__main__":
