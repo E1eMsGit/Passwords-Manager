@@ -1,8 +1,9 @@
 import os
 import pickle
 
-from PyQt5 import QtCore, QtWidgets, uic
+from PyQt5 import QtCore, QtWidgets
 import form_design
+
 
 class MainWindow(QtWidgets.QWidget):
     """
