@@ -14,8 +14,7 @@ def main():
 
     app = QtWidgets.QApplication(sys.argv)
 
-    main_window = MainWindow(bundle_dir)
-    main_window.hide()
+    MainWindow(bundle_dir)
 
     sys.exit(app.exec_())
 

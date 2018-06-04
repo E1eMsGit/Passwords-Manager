@@ -74,7 +74,7 @@ class SecurityDialog(QtWidgets.QDialog):
             self.ui.password_lineEdit.clear()
             QtWidgets.QMessageBox.critical(self,
                                            self.windowTitle(),
-                                           "bad!",
+                                           "Incorrect password!",
                                            QtWidgets.QMessageBox.Ok,
                                            QtWidgets.QMessageBox.Ok
                                            )
