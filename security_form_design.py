@@ -48,7 +48,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Passwords Manager"))
+        Form.setWindowTitle(_translate("Form", "Login"))
         self.label.setText(_translate("Form", "Enter password"))
         self.check_pushButton.setText(_translate("Form", "Accept"))
 
