@@ -1,9 +1,10 @@
 import os
-import sys
 import pickle
 
 from PyQt5 import QtCore, QtWidgets
+
 import form_design
+from security_form import SecurityDialog
 
 
 class MainWindow(QtWidgets.QWidget):
@@ -11,13 +12,11 @@ class MainWindow(QtWidgets.QWidget):
     Главное окно.
     """
 
-    def __init__(self):
+    def __init__(self, bundle_dir):
         QtWidgets.QWidget.__init__(self)
 
-        if getattr(sys, "frozen", False):
-            self.bundle_dir = os.path.dirname(sys.executable)
-        else:
-            self.bundle_dir = os.path.dirname(os.path.abspath(__file__))
+        self.security_dialog = SecurityDialog(bundle_dir, self)
+        self.bundle_dir = bundle_dir
 
         self.ui = form_design.Ui_Form()
         self.ui.setupUi(self)
@@ -26,6 +25,8 @@ class MainWindow(QtWidgets.QWidget):
 
         self.search_dir()
         self.update_files_list()
+
+        self.security_dialog.show()
 
         self.ui.add_file_button.clicked.connect(self.add_file)
         self.ui.delete_file_button.clicked.connect(self.delete_file)
@@ -149,4 +150,4 @@ class MainWindow(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-    print("Это модуль формы")
+    print("Это модуль главной формы")
