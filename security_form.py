@@ -27,6 +27,8 @@ class SecurityDialog(QtWidgets.QDialog):
     def search_password_file(self):
         """
         Ищет или создает файл с паролем для входа в программу.
+        Изменить пароль можно в корневом каталоге приложения в файле password.bin
+        любым текстовым редактором.
         :return:
         """
         default_password = "12345"
@@ -62,7 +64,8 @@ class SecurityDialog(QtWidgets.QDialog):
     @QtCore.pyqtSlot()
     def check_password(self):
         """
-        Создает файл и обновляет список файлов.
+        Проверяет совпадает ли пароль введеный пользователем с паролем
+        находящемся в файле password.bin
         :return:
         """
         user_input = self.ui.password_lineEdit.text()
@@ -81,4 +84,4 @@ class SecurityDialog(QtWidgets.QDialog):
 
 
 if __name__ == "__main__":
-    print("Это модуль главной формы")
+    print("Это модуль диалога входа")
