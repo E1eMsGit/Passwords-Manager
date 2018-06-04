@@ -86,7 +86,7 @@ class MainWindow(QtWidgets.QWidget):
             QtWidgets.QMessageBox.critical(
                 self,
                 self.windowTitle(),
-                "Input file name!",
+                "Enter file name!",
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )

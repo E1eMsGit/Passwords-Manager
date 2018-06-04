@@ -28,6 +28,7 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem1, 2, 1, 1, 1)
         self.password_lineEdit = QtWidgets.QLineEdit(Form)
+        self.password_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_lineEdit.setObjectName("password_lineEdit")
         self.gridLayout.addWidget(self.password_lineEdit, 3, 0, 1, 3)
         spacerItem2 = QtWidgets.QSpacerItem(123, 23, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -49,5 +50,5 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Passwords Manager"))
         self.label.setText(_translate("Form", "Enter password"))
-        self.check_pushButton.setText(_translate("Form", "Check"))
+        self.check_pushButton.setText(_translate("Form", "Accept"))
 
