@@ -23,11 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Passwords Manager</string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>icons/lock-icon.png</normaloff>icons/lock-icon.png</iconset>
+   <string>Login</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="3">

@@ -1,6 +1,7 @@
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtWidgets, QtGui
 
 import security_form_design
+from icons import *
 
 
 class SecurityDialog(QtWidgets.QDialog):
@@ -16,6 +17,7 @@ class SecurityDialog(QtWidgets.QDialog):
 
         self.ui = security_form_design.Ui_Form()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
 
         self.file_name = "password.bin"
         self.password = None
@@ -84,4 +86,4 @@ class SecurityDialog(QtWidgets.QDialog):
 
 
 if __name__ == "__main__":
-    print("Это модуль диалога входа")
+    print("Это модуль диалога проверки пароля")

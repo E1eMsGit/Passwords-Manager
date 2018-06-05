@@ -1,9 +1,10 @@
 import os
 import pickle
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 import form_design
+from icons import *
 from security_form import SecurityDialog
 
 
@@ -20,6 +21,7 @@ class MainWindow(QtWidgets.QWidget):
 
         self.ui = form_design.Ui_Form()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
 
         self.file_name = None
 

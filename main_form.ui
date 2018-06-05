@@ -188,8 +188,6 @@
   </layout>
   <zorder>horizontalSpacer_5</zorder>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

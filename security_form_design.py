@@ -14,9 +14,6 @@ class Ui_Form(object):
         Form.resize(225, 165)
         Form.setMinimumSize(QtCore.QSize(225, 165))
         Form.setMaximumSize(QtCore.QSize(225, 165))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/lock-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        Form.setWindowIcon(icon)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         spacerItem = QtWidgets.QSpacerItem(198, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -48,7 +45,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Passwords Manager"))
+        Form.setWindowTitle(_translate("Form", "Login"))
         self.label.setText(_translate("Form", "Enter password"))
         self.check_pushButton.setText(_translate("Form", "Accept"))
 
