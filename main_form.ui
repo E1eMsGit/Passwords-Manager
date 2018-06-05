@@ -26,8 +26,8 @@
    <string>Passwords Manager</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>icons/lock-icon.png</normaloff>icons/lock-icon.png</iconset>
+   <iconset resource="icons.qrc">
+    <normaloff>:/icons/lock-icon.png</normaloff>:/icons/lock-icon.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="1">
@@ -188,6 +188,8 @@
   </layout>
   <zorder>horizontalSpacer_5</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
