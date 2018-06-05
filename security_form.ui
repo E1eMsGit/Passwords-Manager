@@ -25,10 +25,6 @@
   <property name="windowTitle">
    <string>Login</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>icons/lock-icon.png</normaloff>icons/lock-icon.png</iconset>
-  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="3">
     <spacer name="verticalSpacer_3">

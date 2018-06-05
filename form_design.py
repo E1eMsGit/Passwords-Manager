@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'main_form.ui'
+# Form implementation generated from reading ui file '.\main_form.ui'
 #
 # Created by: PyQt5 UI code generator 5.10.1
 #
@@ -14,9 +14,6 @@ class Ui_Form(object):
         Form.resize(640, 419)
         Form.setMinimumSize(QtCore.QSize(640, 419))
         Form.setMaximumSize(QtCore.QSize(640, 419))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/lock-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        Form.setWindowIcon(icon)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
