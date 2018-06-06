@@ -81,9 +81,10 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         self.file_name = self.ui.file_name_lineEdit.text()
+
         try:
             with open(self.file_name, "wb") as file:
-                pickle.dump("name\t\tlogin\t\tpassword\n" + ("-" * 87), file)
+                pickle.dump("", file)
         except FileNotFoundError:
             QtWidgets.QMessageBox.critical(
                 self,
@@ -92,6 +93,7 @@ class MainWindow(QtWidgets.QWidget):
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )
+
         self.ui.file_name_lineEdit.clear()
         self.ui.listWidget.clear()
         self.update_files_list()
