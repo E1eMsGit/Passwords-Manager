@@ -1,3 +1,22 @@
+# -*- coding: utf-8 -*-
+"""
+=======================================================
+Программа для хранения паролей.
+=======================================================
+Модуль функционала основной формы.
+=======================================================
+* Вызывает диалоговое окно авторизации.
+* При первом запуске создает каталог для хранения файлов с паролями.
+* Заполняет list widget списком файлов из каталога с паролями.
+* Добавление и удаление файлов с паролями.
+* Сохранение содержимого plain text edit в выбранный файл.
+=======================================================
+NOTES: Сборку файлов form_design.py и icons.py выполнял командами:
+    pyuic5 .\main_form.ui -o .\form_design.py
+    pyrcc5 .\icons.qrc -o  .\icons.py
+    Для конвертации формы нужен файл .ui (создается в qt designer)
+    Для конвертации иконок нужен файл .qrc (создается в текстовом редакторе)
+"""
 import os
 import pickle
 
@@ -81,9 +100,10 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
         self.file_name = self.ui.file_name_lineEdit.text()
+
         try:
             with open(self.file_name, "wb") as file:
-                pickle.dump("name\t\tlogin\t\tpassword\n" + ("-" * 87), file)
+                pickle.dump("", file)
         except FileNotFoundError:
             QtWidgets.QMessageBox.critical(
                 self,
@@ -92,6 +112,7 @@ class MainWindow(QtWidgets.QWidget):
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )
+
         self.ui.file_name_lineEdit.clear()
         self.ui.listWidget.clear()
         self.update_files_list()
@@ -152,4 +173,4 @@ class MainWindow(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-    print("Это модуль главной формы")
+    print(__doc__)
