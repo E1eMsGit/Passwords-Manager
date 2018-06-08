@@ -31,35 +31,16 @@ class AddFieDialog(QtWidgets.QDialog):
     def __init__(self, main_form):
         QtWidgets.QDialog.__init__(self)
 
-        self.file_name = None
+        global file_name
+        file_name = None
+
         self.main_form = main_form
 
         self.ui = add_file_form_design.Ui_Form()
         self.ui.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
 
-        self.search_password_file()
-
         self.ui.accept_pushButton.clicked.connect(self.add_file)
-
-    def closeEvent(self, e):
-        """
-        Обработка закрытия окна.
-        :param e:
-        :return:
-        """
-        result = QtWidgets.QMessageBox.question(
-            self,
-            self.windowTitle(),
-            "Are you sure you want to exit?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
-            QtWidgets.QMessageBox.No
-        )
-        if result == QtWidgets.QMessageBox.Yes:
-            e.accept()
-            QtWidgets.QWidget.closeEvent(self, e)
-        else:
-            e.ignore()
 
     @QtCore.pyqtSlot()
     def add_file(self):
@@ -67,11 +48,16 @@ class AddFieDialog(QtWidgets.QDialog):
         Создает файл и обновляет список файлов.
         :return:
         """
-        self.file_name = self.ui.file_name_lineEdit.text()
+        file_name = self.ui.file_name_lineEdit.text()
 
         try:
-            with open(self.file_name, "wb") as file:
+            with open(file_name, "wb") as file:
                 pickle.dump("", file)
+
+            self.ui.file_name_lineEdit.clear()
+            self.hide()
+            self.main_form.listWidget.clear()
+            self.main_form.update_files_list()
         except FileNotFoundError:
             QtWidgets.QMessageBox.critical(
                 self,
@@ -80,12 +66,6 @@ class AddFieDialog(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )
-
-        self.ui.file_name_lineEdit.clear()
-        self.hide()
-
-        self.main_form.listWidget.clear()
-        self.main_form.update_files_list()
 
 
 if __name__ == "__main__":

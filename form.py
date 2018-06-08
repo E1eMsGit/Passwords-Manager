@@ -25,6 +25,7 @@ from PyQt5 import QtGui, QtWidgets
 import form_design
 from icons import *
 from security_form import SecurityDialog
+from add_file_form import AddFieDialog
 
 
 class MainWindow(QtWidgets.QWidget):
@@ -99,23 +100,8 @@ class MainWindow(QtWidgets.QWidget):
         Создает файл и обновляет список файлов.
         :return:
         """
-        self.file_name = self.ui.file_name_lineEdit.text()
-
-        try:
-            with open(self.file_name, "wb") as file:
-                pickle.dump("", file)
-        except FileNotFoundError:
-            QtWidgets.QMessageBox.critical(
-                self,
-                self.windowTitle(),
-                "Enter file name!",
-                QtWidgets.QMessageBox.Ok,
-                QtWidgets.QMessageBox.Ok
-            )
-
-        self.ui.file_name_lineEdit.clear()
-        self.ui.listWidget.clear()
-        self.update_files_list()
+        add_file_dialog = AddFieDialog(self)
+        add_file_dialog.exec_()
 
     @QtCore.pyqtSlot()
     def delete_file(self):
