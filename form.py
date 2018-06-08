@@ -72,6 +72,8 @@ class MainWindow(QtWidgets.QWidget):
         Выводит список файлов находящихся в каталоге Passwords.
         :return:
         """
+        self.ui.listWidget.clear()
+
         for file in os.listdir("."):
             self.ui.listWidget.addItem(file)
 
@@ -130,7 +132,6 @@ class MainWindow(QtWidgets.QWidget):
             self.ui.plainTextEdit.clear()
             self.ui.plainTextEdit.setEnabled(False)
             self.ui.save_button.setEnabled(False)
-            self.ui.listWidget.clear()
             self.update_files_list()
         else:
             pass

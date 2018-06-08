@@ -31,9 +31,6 @@ class AddFieDialog(QtWidgets.QDialog):
     def __init__(self, main_form):
         QtWidgets.QDialog.__init__(self)
 
-        global file_name
-        file_name = None
-
         self.main_form = main_form
 
         self.ui = add_file_form_design.Ui_Form()
@@ -55,9 +52,10 @@ class AddFieDialog(QtWidgets.QDialog):
                 pickle.dump("", file)
 
             self.ui.file_name_lineEdit.clear()
-            self.hide()
-            self.main_form.listWidget.clear()
+
+            self.main_form.file_name = file_name
             self.main_form.update_files_list()
+            self.hide()
         except FileNotFoundError:
             QtWidgets.QMessageBox.critical(
                 self,
