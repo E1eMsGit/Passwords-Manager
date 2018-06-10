@@ -15,6 +15,7 @@ NOTES: Пароль авторизации можно изменить откр�
     Для конвертации формы нужен файл .ui (создается в qt designer)
     Для конвертации иконок нужен файл .qrc (создается в текстовом редакторе)
 """
+import os
 import pickle
 
 from PyQt5 import QtWidgets, QtGui
@@ -47,17 +48,17 @@ class AddFieDialog(QtWidgets.QDialog):
         """
         file_name = self.ui.file_name_lineEdit.text()
 
-        try:
-            with open(file_name, "wb") as file:
-                pickle.dump("", file)
-
+        if file_name in os.listdir(os.getcwd()):
+            QtWidgets.QMessageBox.critical(
+                self,
+                self.windowTitle(),
+                "File already exists",
+                QtWidgets.QMessageBox.Ok,
+                QtWidgets.QMessageBox.Ok
+            )
             self.ui.file_name_lineEdit.clear()
-
-            self.main_form.file_name = file_name
-            self.main_form.update_files_list()
-            self.main_form.file_name = None
-            self.hide()
-        except FileNotFoundError:
+            self.ui.file_name_lineEdit.setFocus()
+        elif file_name == "":
             QtWidgets.QMessageBox.critical(
                 self,
                 self.windowTitle(),
@@ -65,6 +66,16 @@ class AddFieDialog(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )
+            self.ui.file_name_lineEdit.setFocus()
+        else:
+            with open(file_name, "wb") as file:
+                pickle.dump("", file)
+
+            self.ui.file_name_lineEdit.clear()
+            self.main_form.file_name = file_name
+            self.main_form.update_files_list()
+            self.main_form.file_name = None
+            self.hide()
 
 
 if __name__ == "__main__":

@@ -160,6 +160,14 @@ class MainWindow(QtWidgets.QWidget):
         with open(self.file_name, "wb") as file:
             pickle.dump(self.ui.plainTextEdit.toPlainText(), file)
 
+        QtWidgets.QMessageBox.information(
+            self,
+            self.windowTitle(),
+            "Changes saved",
+            QtWidgets.QMessageBox.Ok,
+            QtWidgets.QMessageBox.Ok
+        )
+
 
 if __name__ == "__main__":
     print(__doc__)

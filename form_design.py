@@ -14,6 +14,9 @@ class Ui_Form(object):
         Form.resize(640, 419)
         Form.setMinimumSize(QtCore.QSize(640, 419))
         Form.setMaximumSize(QtCore.QSize(640, 419))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/lock-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Form.setWindowIcon(icon)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -102,7 +105,7 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "LOGIN"))
         self.label_4.setText(_translate("Form", "PASSWORD"))
         self.save_button.setToolTip(_translate("Form", "Save changes to file"))
-        self.save_button.setText(_translate("Form", "Accept"))
+        self.save_button.setText(_translate("Form", "Apply"))
         self.add_file_button.setToolTip(_translate("Form", "Add File"))
         self.delete_file_button.setToolTip(_translate("Form", "Delete File"))
 

@@ -26,7 +26,7 @@
    <string>Passwords Manager</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="icons.qrc">
+   <iconset>
     <normaloff>:/icons/lock-icon.png</normaloff>:/icons/lock-icon.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -149,7 +149,7 @@
             <string>Save changes to file</string>
            </property>
            <property name="text">
-            <string>Accept</string>
+            <string>Apply</string>
            </property>
           </widget>
          </item>
