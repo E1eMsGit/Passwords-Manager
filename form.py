@@ -25,6 +25,7 @@ from PyQt5 import QtGui, QtWidgets
 import form_design
 from icons import *
 from security_form import SecurityDialog
+from add_file_form import AddFieDialog
 
 
 class MainWindow(QtWidgets.QWidget):
@@ -41,6 +42,9 @@ class MainWindow(QtWidgets.QWidget):
         self.ui = form_design.Ui_Form()
         self.ui.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
+        self.ui.add_file_button.setIcon(QtGui.QIcon(":/images/add.png"))
+        self.ui.delete_file_button.setIcon(QtGui.QIcon(":/images/delete.png"))
+        self.ui.save_button.setIcon(QtGui.QIcon(":/images/save.png"))
 
         self.file_name = None
 
@@ -71,6 +75,8 @@ class MainWindow(QtWidgets.QWidget):
         Выводит список файлов находящихся в каталоге Passwords.
         :return:
         """
+        self.ui.listWidget.clear()
+
         for file in os.listdir("."):
             self.ui.listWidget.addItem(file)
 
@@ -99,23 +105,8 @@ class MainWindow(QtWidgets.QWidget):
         Создает файл и обновляет список файлов.
         :return:
         """
-        self.file_name = self.ui.file_name_lineEdit.text()
-
-        try:
-            with open(self.file_name, "wb") as file:
-                pickle.dump("", file)
-        except FileNotFoundError:
-            QtWidgets.QMessageBox.critical(
-                self,
-                self.windowTitle(),
-                "Enter file name!",
-                QtWidgets.QMessageBox.Ok,
-                QtWidgets.QMessageBox.Ok
-            )
-
-        self.ui.file_name_lineEdit.clear()
-        self.ui.listWidget.clear()
-        self.update_files_list()
+        add_file_dialog = AddFieDialog(self)
+        add_file_dialog.exec_()
 
     @QtCore.pyqtSlot()
     def delete_file(self):
@@ -123,31 +114,29 @@ class MainWindow(QtWidgets.QWidget):
         Удаляет выбранный файл и обновляет список файлов.
         :return:
         """
-        deleting = QtWidgets.QMessageBox.question(
-            self,
-            self.windowTitle(),
-            "Are you sure you want to delete this file from your computer?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
-            QtWidgets.QMessageBox.No
-        )
-        if deleting == QtWidgets.QMessageBox.Yes:
-            try:
-                os.remove(self.file_name)
-            except (TypeError, FileNotFoundError):
-                QtWidgets.QMessageBox.critical(
-                    self,
-                    self.windowTitle(),
-                    "Select the file!",
-                    QtWidgets.QMessageBox.Ok,
-                    QtWidgets.QMessageBox.Ok
-                )
+
+        if self.file_name is None:
+            QtWidgets.QMessageBox.critical(
+                self,
+                self.windowTitle(),
+                "Select the file!",
+                QtWidgets.QMessageBox.Ok,
+                QtWidgets.QMessageBox.Ok
+            )
+        else:
+            QtWidgets.QMessageBox.question(
+                self,
+                self.windowTitle(),
+                "Are you sure you want to delete this file from your computer?",
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                QtWidgets.QMessageBox.No
+            )
+            os.remove(self.file_name)
+
             self.ui.plainTextEdit.clear()
             self.ui.plainTextEdit.setEnabled(False)
             self.ui.save_button.setEnabled(False)
-            self.ui.listWidget.clear()
             self.update_files_list()
-        else:
-            pass
 
     @QtCore.pyqtSlot()
     def on_item_clicked(self):

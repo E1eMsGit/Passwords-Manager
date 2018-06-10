@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="/images">
     <file alias='lock-icon.png'>icons/lock-icon.png</file>
+    <file alias='add.png'>icons/add.png</file>
+    <file alias='delete.png'>icons/delete.png</file>
+    <file alias='save.png'>icons/save.png</file>
   </qresource>
 </RCC>
