@@ -46,7 +46,7 @@ class MainWindow(QtWidgets.QWidget):
         self.ui.delete_file_button.setIcon(QtGui.QIcon(":/images/delete.png"))
         self.ui.save_button.setIcon(QtGui.QIcon(":/images/save.png"))
 
-        self.file_name = None
+        self.file_name = ""
 
         self.search_dir()
         self.update_files_list()
@@ -115,7 +115,7 @@ class MainWindow(QtWidgets.QWidget):
         :return:
         """
 
-        if self.file_name is None:
+        if self.file_name == "":
             QtWidgets.QMessageBox.critical(
                 self,
                 self.windowTitle(),
@@ -133,6 +133,7 @@ class MainWindow(QtWidgets.QWidget):
             )
             os.remove(self.file_name)
 
+            self.file_name = ""
             self.ui.plainTextEdit.clear()
             self.ui.plainTextEdit.setEnabled(False)
             self.ui.save_button.setEnabled(False)

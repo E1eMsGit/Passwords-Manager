@@ -39,7 +39,7 @@ class SecurityDialog(QtWidgets.QDialog):
         self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
 
         self.file_name = "password.bin"
-        self.password = None
+        self.password = ""
 
         self.search_password_file()
 
@@ -102,6 +102,7 @@ class SecurityDialog(QtWidgets.QDialog):
                                            QtWidgets.QMessageBox.Ok,
                                            QtWidgets.QMessageBox.Ok
                                            )
+            self.ui.password_lineEdit.setFocus()
 
 
 if __name__ == "__main__":

@@ -74,7 +74,7 @@ class AddFieDialog(QtWidgets.QDialog):
             self.ui.file_name_lineEdit.clear()
             self.main_form.file_name = file_name
             self.main_form.update_files_list()
-            self.main_form.file_name = None
+            self.main_form.file_name = ""
             self.hide()
 
 
