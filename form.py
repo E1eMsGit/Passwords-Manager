@@ -24,7 +24,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox, QWidget
 
 import form_design
-from add_file_form import AddFieDialog
+from add_file_form import AddFileDialog
 from icons import *
 from login_form import LoginDialog
 
@@ -37,7 +37,7 @@ class MainWindow(QWidget):
     def __init__(self, bundle_dir):
         QWidget.__init__(self)
 
-        self.security_dialog = LoginDialog(bundle_dir, self)
+        self.login_dialog = LoginDialog(bundle_dir, self)
         self.bundle_dir = bundle_dir
 
         self.ui = form_design.Ui_Form()
@@ -49,7 +49,7 @@ class MainWindow(QWidget):
 
         self.file_name = ""
 
-        self.security_dialog.show()
+        self.login_dialog.show()
         self.search_dir()
         self.update_files_list()
 
@@ -57,9 +57,6 @@ class MainWindow(QWidget):
         self.ui.delete_file_button.clicked.connect(self.delete_file)
         self.ui.listWidget.itemClicked.connect(self.on_item_clicked)
         self.ui.save_button.clicked.connect(self.save_to_file)
-
-    def show_security_dialog(self):
-        pass
 
     def search_dir(self):
         """
@@ -108,7 +105,7 @@ class MainWindow(QWidget):
         Создает файл и обновляет список файлов.
         :return:
         """
-        add_file_dialog = AddFieDialog(self)
+        add_file_dialog = AddFileDialog(self)
         add_file_dialog.exec_()
 
     @QtCore.pyqtSlot()

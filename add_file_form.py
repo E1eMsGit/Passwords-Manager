@@ -25,7 +25,7 @@ import add_file_form_design
 from icons import *
 
 
-class AddFieDialog(QDialog):
+class AddFileDialog(QDialog):
     """
     Главное окно.
     """
