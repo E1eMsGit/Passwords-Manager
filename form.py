@@ -20,31 +20,32 @@ NOTES: Сборку файлов form_design.py и icons.py выполнял к�
 import os
 import pickle
 
-from PyQt5 import QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMessageBox, QWidget
 
 import form_design
+from add_file_form import AddFieDialog
 from icons import *
 from security_form import SecurityDialog
-from add_file_form import AddFieDialog
 
 
-class MainWindow(QtWidgets.QWidget):
+class MainWindow(QWidget):
     """
     Главное окно.
     """
 
     def __init__(self, bundle_dir):
-        QtWidgets.QWidget.__init__(self)
+        QWidget.__init__(self)
 
         self.security_dialog = SecurityDialog(bundle_dir, self)
         self.bundle_dir = bundle_dir
 
         self.ui = form_design.Ui_Form()
         self.ui.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
-        self.ui.add_file_button.setIcon(QtGui.QIcon(":/images/add.png"))
-        self.ui.delete_file_button.setIcon(QtGui.QIcon(":/images/delete.png"))
-        self.ui.save_button.setIcon(QtGui.QIcon(":/images/save.png"))
+        self.setWindowIcon(QIcon(":/images/lock-icon.png"))
+        self.ui.add_file_button.setIcon(QIcon(":/images/add.png"))
+        self.ui.delete_file_button.setIcon(QIcon(":/images/delete.png"))
+        self.ui.save_button.setIcon(QIcon(":/images/save.png"))
 
         self.file_name = ""
 
@@ -86,16 +87,16 @@ class MainWindow(QtWidgets.QWidget):
         :param e:
         :return:
         """
-        result = QtWidgets.QMessageBox.question(
+        result = QMessageBox.question(
             self,
             self.windowTitle(),
             "Are you sure you want to exit?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
-            QtWidgets.QMessageBox.No
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No
         )
-        if result == QtWidgets.QMessageBox.Yes:
+        if result == QMessageBox.Yes:
             e.accept()
-            QtWidgets.QWidget.closeEvent(self, e)
+            QWidget.closeEvent(self, e)
         else:
             e.ignore()
 
@@ -116,20 +117,20 @@ class MainWindow(QtWidgets.QWidget):
         """
 
         if self.file_name == "":
-            QtWidgets.QMessageBox.critical(
+            QMessageBox.critical(
                 self,
                 self.windowTitle(),
                 "Select the file!",
-                QtWidgets.QMessageBox.Ok,
-                QtWidgets.QMessageBox.Ok
+                QMessageBox.Ok,
+                QMessageBox.Ok
             )
         else:
-            QtWidgets.QMessageBox.question(
+            QMessageBox.question(
                 self,
                 self.windowTitle(),
                 "Are you sure you want to delete this file from your computer?",
-                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
-                QtWidgets.QMessageBox.No
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
             )
             os.remove(self.file_name)
 
@@ -161,12 +162,12 @@ class MainWindow(QtWidgets.QWidget):
         with open(self.file_name, "wb") as file:
             pickle.dump(self.ui.plainTextEdit.toPlainText(), file)
 
-        QtWidgets.QMessageBox.information(
+        QMessageBox.information(
             self,
             self.windowTitle(),
             "Changes saved",
-            QtWidgets.QMessageBox.Ok,
-            QtWidgets.QMessageBox.Ok
+            QMessageBox.Ok,
+            QMessageBox.Ok
         )
 
 

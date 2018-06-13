@@ -17,26 +17,27 @@ NOTES: Пароль авторизации можно изменить откр�
     Для конвертации формы нужен файл .ui (создается в qt designer)
     Для конвертации иконок нужен файл .qrc (создается в текстовом редакторе)
 """
-from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QMessageBox, QWidget
 
 import security_form_design
 from icons import *
 
 
-class SecurityDialog(QtWidgets.QDialog):
+class SecurityDialog(QDialog):
     """
     Главное окно.
     """
 
     def __init__(self, bundle_dir, main_form):
-        QtWidgets.QDialog.__init__(self)
+        QDialog.__init__(self)
 
         self.bundle_dir = bundle_dir
         self.main_form = main_form
 
         self.ui = security_form_design.Ui_Form()
         self.ui.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
+        self.setWindowIcon(QIcon(":/images/lock-icon.png"))
 
         self.file_name = "password.bin"
         self.password = ""
@@ -60,8 +61,7 @@ class SecurityDialog(QtWidgets.QDialog):
         except FileNotFoundError:
             with open(self.file_name, "w") as f:
                 f.write(default_password)
-            with open(self.file_name, "r") as f:
-                self.password = f.readline()
+            self.password = default_password
 
     def closeEvent(self, e):
         """
@@ -69,16 +69,16 @@ class SecurityDialog(QtWidgets.QDialog):
         :param e:
         :return:
         """
-        result = QtWidgets.QMessageBox.question(
+        result = QMessageBox.question(
             self,
             self.windowTitle(),
             "Are you sure you want to exit?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
-            QtWidgets.QMessageBox.No
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No
         )
-        if result == QtWidgets.QMessageBox.Yes:
+        if result == QMessageBox.Yes:
             e.accept()
-            QtWidgets.QWidget.closeEvent(self, e)
+            QWidget.closeEvent(self, e)
         else:
             e.ignore()
 
@@ -95,13 +95,14 @@ class SecurityDialog(QtWidgets.QDialog):
             self.hide()
             self.main_form.show()
         else:
+            QMessageBox.critical(
+                self,
+                self.windowTitle(),
+                "Incorrect password!",
+                QMessageBox.Ok,
+                QMessageBox.Ok
+            )
             self.ui.password_lineEdit.clear()
-            QtWidgets.QMessageBox.critical(self,
-                                           self.windowTitle(),
-                                           "Incorrect password!",
-                                           QtWidgets.QMessageBox.Ok,
-                                           QtWidgets.QMessageBox.Ok
-                                           )
             self.ui.password_lineEdit.setFocus()
 
 

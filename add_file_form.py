@@ -18,25 +18,26 @@ NOTES: Пароль авторизации можно изменить откр�
 import os
 import pickle
 
-from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QDialog, QMessageBox
 
 import add_file_form_design
 from icons import *
 
 
-class AddFieDialog(QtWidgets.QDialog):
+class AddFieDialog(QDialog):
     """
     Главное окно.
     """
 
     def __init__(self, main_form):
-        QtWidgets.QDialog.__init__(self)
+        QDialog.__init__(self)
 
         self.main_form = main_form
 
         self.ui = add_file_form_design.Ui_Form()
         self.ui.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon(":/images/lock-icon.png"))
+        self.setWindowIcon(QIcon(":/images/lock-icon.png"))
 
         self.ui.accept_pushButton.clicked.connect(self.add_file)
 
@@ -49,29 +50,28 @@ class AddFieDialog(QtWidgets.QDialog):
         file_name = self.ui.file_name_lineEdit.text().strip()
 
         if file_name in os.listdir(os.getcwd()):
-            QtWidgets.QMessageBox.critical(
+            QMessageBox.critical(
                 self,
                 self.windowTitle(),
                 "File already exists",
-                QtWidgets.QMessageBox.Ok,
-                QtWidgets.QMessageBox.Ok
+                QMessageBox.Ok,
+                QMessageBox.Ok
             )
             self.ui.file_name_lineEdit.clear()
             self.ui.file_name_lineEdit.setFocus()
         elif file_name == "":
-            QtWidgets.QMessageBox.critical(
+            QMessageBox.critical(
                 self,
                 self.windowTitle(),
                 "Enter file name!",
-                QtWidgets.QMessageBox.Ok,
-                QtWidgets.QMessageBox.Ok
+                QMessageBox.Ok,
+                QMessageBox.Ok
             )
             self.ui.file_name_lineEdit.clear()
             self.ui.file_name_lineEdit.setFocus()
         else:
             with open(file_name, "wb") as file:
                 pickle.dump("", file)
-
             self.ui.file_name_lineEdit.clear()
             self.main_form.file_name = file_name
             self.main_form.update_files_list()
