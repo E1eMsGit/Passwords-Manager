@@ -219,7 +219,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Delete File</string>
+          <string>Delete File (Del)</string>
          </property>
          <property name="text">
           <string/>
