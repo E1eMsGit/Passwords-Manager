@@ -124,7 +124,6 @@ class MainWindow(QWidget):
         Удаляет выбранный файл и обновляет список файлов.
         :return:
         """
-
         result = QMessageBox.question(
             self,
             self.windowTitle(),
