@@ -46,7 +46,7 @@ class AddFieDialog(QtWidgets.QDialog):
         Создает файл и обновляет список файлов.
         :return:
         """
-        file_name = self.ui.file_name_lineEdit.text()
+        file_name = self.ui.file_name_lineEdit.text().strip()
 
         if file_name in os.listdir(os.getcwd()):
             QtWidgets.QMessageBox.critical(
@@ -66,6 +66,7 @@ class AddFieDialog(QtWidgets.QDialog):
                 QtWidgets.QMessageBox.Ok,
                 QtWidgets.QMessageBox.Ok
             )
+            self.ui.file_name_lineEdit.clear()
             self.ui.file_name_lineEdit.setFocus()
         else:
             with open(file_name, "wb") as file:

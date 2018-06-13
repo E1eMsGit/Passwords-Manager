@@ -65,7 +65,7 @@
    <item row="3" column="0" colspan="3">
     <widget class="QLineEdit" name="file_name_lineEdit">
      <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
+      <enum>QLineEdit::Normal</enum>
      </property>
     </widget>
    </item>

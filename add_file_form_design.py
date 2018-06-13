@@ -25,7 +25,7 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem1, 2, 1, 1, 1)
         self.file_name_lineEdit = QtWidgets.QLineEdit(Form)
-        self.file_name_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.file_name_lineEdit.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.file_name_lineEdit.setObjectName("file_name_lineEdit")
         self.gridLayout.addWidget(self.file_name_lineEdit, 3, 0, 1, 3)
         spacerItem2 = QtWidgets.QSpacerItem(123, 23, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
