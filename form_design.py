@@ -108,5 +108,5 @@ class Ui_Form(object):
         self.save_button.setToolTip(_translate("Form", "Save changes to file (Ctrl+S)"))
         self.save_button.setText(_translate("Form", "Apply"))
         self.add_file_button.setToolTip(_translate("Form", "Add File"))
-        self.delete_file_button.setToolTip(_translate("Form", "Delete File"))
+        self.delete_file_button.setToolTip(_translate("Form", "Delete File (Del)"))
 
