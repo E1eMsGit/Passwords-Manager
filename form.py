@@ -58,6 +58,11 @@ class MainWindow(QWidget):
         self.ui.plainTextEdit.addAction(plain_text_save_shortcut)
         plain_text_save_shortcut.triggered.connect(self.save_to_file)
 
+        list_widget_delete_shortcut = QAction(self.ui.listWidget)
+        list_widget_delete_shortcut.setShortcut(QKeySequence("Delete"))
+        self.ui.plainTextEdit.addAction(list_widget_delete_shortcut)
+        list_widget_delete_shortcut.triggered.connect(self.delete_file)
+
         self.ui.add_file_button.clicked.connect(self.add_file)
         self.ui.delete_file_button.clicked.connect(self.delete_file)
         self.ui.listWidget.itemClicked.connect(self.on_item_clicked)
@@ -120,29 +125,24 @@ class MainWindow(QWidget):
         :return:
         """
 
-        if self.file_name == "":
-            QMessageBox.critical(
-                self,
-                self.windowTitle(),
-                "Select the file!",
-                QMessageBox.Ok,
-                QMessageBox.Ok
-            )
-        else:
-            QMessageBox.question(
-                self,
-                self.windowTitle(),
-                "Are you sure you want to delete this file from your computer?",
-                QMessageBox.Yes | QMessageBox.No,
-                QMessageBox.No
-            )
-            os.remove(self.file_name)
+        result = QMessageBox.question(
+            self,
+            self.windowTitle(),
+            "Are you sure you want to delete this file from your computer?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No
+        )
 
+        if result == QMessageBox.Yes:
+            os.remove(self.file_name)
             self.file_name = ""
+            self.ui.delete_file_button.setEnabled(False)
             self.ui.plainTextEdit.clear()
             self.ui.plainTextEdit.setEnabled(False)
             self.ui.save_button.setEnabled(False)
             self.update_files_list()
+        else:
+            pass
 
     @QtCore.pyqtSlot()
     def on_item_clicked(self):
@@ -151,6 +151,7 @@ class MainWindow(QWidget):
         :return:
         """
         self.ui.plainTextEdit.setEnabled(True)
+        self.ui.delete_file_button.setEnabled(True)
         self.ui.save_button.setEnabled(True)
         self.file_name = self.sender().currentItem().text()
 

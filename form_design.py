@@ -80,6 +80,7 @@ class Ui_Form(object):
         self.add_file_button.setObjectName("add_file_button")
         self.horizontalLayout_4.addWidget(self.add_file_button)
         self.delete_file_button = QtWidgets.QPushButton(Form)
+        self.delete_file_button.setEnabled(False)
         self.delete_file_button.setMinimumSize(QtCore.QSize(50, 0))
         self.delete_file_button.setMaximumSize(QtCore.QSize(170, 16777215))
         self.delete_file_button.setText("")
