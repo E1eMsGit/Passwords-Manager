@@ -20,8 +20,8 @@ NOTES: Сборку файлов form_design.py и icons.py выполнял к�
 import os
 import pickle
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMessageBox, QWidget
+from PyQt5.QtGui import QIcon, QKeySequence
+from PyQt5.QtWidgets import QMessageBox, QWidget, QAction
 
 import form_design
 from add_file_form import AddFileDialog
@@ -52,6 +52,11 @@ class MainWindow(QWidget):
         self.login_dialog.show()
         self.search_dir()
         self.update_files_list()
+
+        plain_text_save_shortcut = QAction(self.ui.plainTextEdit)
+        plain_text_save_shortcut.setShortcut(QKeySequence("Ctrl+S"))
+        self.ui.plainTextEdit.addAction(plain_text_save_shortcut)
+        plain_text_save_shortcut.triggered.connect(self.save_to_file)
 
         self.ui.add_file_button.clicked.connect(self.add_file)
         self.ui.delete_file_button.clicked.connect(self.delete_file)

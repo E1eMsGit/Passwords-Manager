@@ -104,7 +104,7 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "NAME"))
         self.label_3.setText(_translate("Form", "LOGIN"))
         self.label_4.setText(_translate("Form", "PASSWORD"))
-        self.save_button.setToolTip(_translate("Form", "Save changes to file"))
+        self.save_button.setToolTip(_translate("Form", "Save changes to file (Ctrl+S)"))
         self.save_button.setText(_translate("Form", "Apply"))
         self.add_file_button.setToolTip(_translate("Form", "Add File"))
         self.delete_file_button.setToolTip(_translate("Form", "Delete File"))

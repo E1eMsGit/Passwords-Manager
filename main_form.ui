@@ -146,7 +146,7 @@
             <bool>false</bool>
            </property>
            <property name="toolTip">
-            <string>Save changes to file</string>
+            <string>Save changes to file (Ctrl+S)</string>
            </property>
            <property name="text">
             <string>Apply</string>
