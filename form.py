@@ -85,7 +85,13 @@ class MainWindow(QWidget):
         Выводит список файлов находящихся в каталоге Passwords.
         :return:
         """
+        self.file_name = ""
+
         self.ui.listWidget.clear()
+        self.ui.plainTextEdit.clear()
+        self.ui.plainTextEdit.setEnabled(False)
+        self.ui.delete_file_button.setEnabled(False)
+        self.ui.save_button.setEnabled(False)
 
         for file in os.listdir(os.getcwd()):
             self.ui.listWidget.addItem(file)
@@ -134,11 +140,6 @@ class MainWindow(QWidget):
 
         if result == QMessageBox.Yes:
             os.remove(self.file_name)
-            self.file_name = ""
-            self.ui.delete_file_button.setEnabled(False)
-            self.ui.plainTextEdit.clear()
-            self.ui.plainTextEdit.setEnabled(False)
-            self.ui.save_button.setEnabled(False)
             self.update_files_list()
         else:
             pass
