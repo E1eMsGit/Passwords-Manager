@@ -20,11 +20,11 @@ NOTES: Пароль авторизации можно изменить откр�
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QMessageBox, QWidget
 
-import security_form_design
+import login_form_design
 from icons import *
 
 
-class SecurityDialog(QDialog):
+class LoginDialog(QDialog):
     """
     Главное окно.
     """
@@ -35,7 +35,7 @@ class SecurityDialog(QDialog):
         self.bundle_dir = bundle_dir
         self.main_form = main_form
 
-        self.ui = security_form_design.Ui_Form()
+        self.ui = login_form_design.Ui_Form()
         self.ui.setupUi(self)
         self.setWindowIcon(QIcon(":/images/lock-icon.png"))
 
