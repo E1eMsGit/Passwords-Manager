@@ -15,7 +15,7 @@ NOTES: Сборку в один файл делал через PyInstaller.
 import os
 import sys
 
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication
 
 from form import MainWindow
 
@@ -26,7 +26,7 @@ def main():
     else:
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
 
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     MainWindow(bundle_dir)
 
