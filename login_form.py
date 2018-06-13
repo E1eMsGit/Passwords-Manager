@@ -12,7 +12,7 @@
 NOTES: Пароль авторизации можно изменить открыв password.bin
     в любом текстовом редакторе .
     Сборку файлов form_design.py и icons.py выполнял командами:
-    pyuic5 .\security_form.ui -o .\security_form_design.py
+    pyuic5 .\login_form.ui -o .\login_form_design.py
     pyrcc5 .\icons.qrc -o  .\icons.py
     Для конвертации формы нужен файл .ui (создается в qt designer)
     Для конвертации иконок нужен файл .qrc (создается в текстовом редакторе)
